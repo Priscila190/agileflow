@@ -5,6 +5,35 @@ import bleach
 
 auth_bp = Blueprint('auth', __name__)
 
+@auth_bp.route('/update_password', methods=['GET', 'POST'])
+@login_required
+def update_password():
+    if request.method == 'POST':
+        current_password = request.form.get('current_password', '')
+        new_password = request.form.get('new_password', '')
+        confirm_password = request.form.get('confirm_password', '')
+
+        user = User.query.get(session['user_id'])
+
+        if not user.check_password(current_password):
+            flash('Senha atual incorreta.', 'error')
+            return redirect(url_for('auth.update_password'))
+
+        if len(new_password) < 6:
+            flash('A nova senha deve ter pelo menos 6 caracteres.', 'error')
+        elif new_password != confirm_password:
+            flash('As senhas não coincidem.', 'error')
+        else:
+            user.set_password(new_password)
+            try:
+                db.session.commit()
+                flash('Senha atualizada com sucesso!', 'success')
+                return redirect(url_for('appointments.my_appointments'))
+            except Exception:
+                db.session.rollback()
+                flash('Erro ao atualizar a senha. Tente novamente.', 'error')
+
+    return render_template('auth/update_password.html')
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():

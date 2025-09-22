@@ -1,0 +1,209 @@
+<nav class="navbar navbar-expand-lg navbar-dark navbar-color-custom" role="navigation">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center w-100">
+            <a class="navbar-brand fw-bold" href="/" aria-label="Página inicial do AgileFlow">
+                <i class="fas fa-calendar-check me-2"></i>AgileFlow
+            </a>
+            <button class="navbar-toggler navbar-toggler-custom border-0" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Alternar menu de navegação">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse mt-2 mt-lg-0" id="navbarNav">
+            <ul class="navbar-nav ms-lg-auto justify-content-lg-end">
+                {% if session.get('user_id') %}
+                <li class="nav-item">
+                    <a class="nav-link d-flex flex-column align-items-center justify-content-center py-2 px-3"
+                       href="/schedule" aria-label="Agendar compromisso">
+                        <i class="fas fa-plus me-1 mb-2"></i>Agendar
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex flex-column align-items-center justify-content-center py-2 px-3"
+                       href="/appointments" aria-label="Ver compromissos">
+                        <i class="fas fa-list me-1 mb-2"></i>Compromissos
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link d-flex flex-column align-items-center justify-content-center py-2 px-3"
+                       href="#"
+                       id="navbarDropdown"
+                       role="button"
+                       data-bs-toggle="dropdown"
+                       aria-expanded="false"
+                       aria-label="Menu de usuário"
+                       style="width: 100%;">
+                        <i class="fas fa-user-circle me-1 mb-2"></i>
+                        <span>{{ session.get('username', 'Usuário') }}</span>
+                    </a>
+                    <ul class="dropdown-menu w-100" aria-labelledby="navbarDropdown">
+                        <li class="px-3 py-2 text-muted small text-center">
+                            Logado como <strong>{{ session.get('username', 'Usuário') }}</strong>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="/logout" aria-label="Sair">
+                                <i class="fas fa-sign-out-alt me-2"></i>Sair
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link py-2 px-3" href="/login" aria-label="Entrar">
+                        <i class="fas fa-sign-in-alt me-1"></i>Entrar
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link py-2 px-3" href="/register" aria-label="Registrar">
+                        <i class="fas fa-user-plus me-1"></i>Registrar
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        function setActiveNav() {
+            const navLinks = document.querySelectorAll('.navbar-nav .nav-link, .dropdown-item');
+            const currentPath = window.location.pathname;
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                const linkPath = link.getAttribute('href');
+                if (linkPath === currentPath || (currentPath === '/' && linkPath === '/')) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        setActiveNav();
+
+        window.addEventListener('popstate', setActiveNav);
+
+    });
+</script>
+
+
+<style>
+    .navbar-color-custom {
+        min-height: 25px;
+        background-color: #212529;
+        padding: 0.75rem 0;
+    }
+
+
+    .navbar-brand {
+        font-size: 1.25rem;
+        color: #f8f9fa;
+    }
+
+    .navbar-brand:hover {
+        color: #f8f9fa;
+    }
+
+    .navbar-toggler-custom {
+        border: none;
+        outline: none;
+        color: #f8f9fa;
+    }
+
+    .navbar-toggler-custom:focus {
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+    }
+
+    .navbar-nav .nav-link {
+        margin: 0 0.5rem;
+        color: rgba(255, 255, 255, 0.75);
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: #f8f9fa;
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .navbar-nav .nav-link.active {
+        color: #f8f9fa !important;
+        background-color: rgba(255, 255, 255, 0.2);
+        font-weight: bold;
+    }
+
+
+    .dropdown-menu {
+        border: none;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        background-color: #343a40;
+        border-radius: 0.25rem;
+    }
+
+    .dropdown-menu .dropdown-item {
+        color: rgba(255, 255, 255, 0.85);
+        padding: 0.75rem 1.25rem;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .dropdown-menu .dropdown-item:hover,
+    .dropdown-menu .dropdown-item:active {
+        color: #f8f9fa !important;
+        background-color: #495057;
+    }
+
+    .dropdown-menu .dropdown-item.active {
+        background-color: #495057 !important;
+        color: #f8f9fa !important;
+        font-weight: bold;
+    }
+
+    .dropdown-menu .text-muted.small {
+        color: rgba(255, 255, 255, 0.6) !important;
+        padding: 0.75rem 1.25rem;
+    }
+
+    .dropdown-divider {
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+
+    @media (max-width: 991.98px) {
+        .navbar-nav {
+            margin-top: 0.5rem;
+            width: 100%;
+        }
+
+        .navbar-nav .nav-item {
+            width: 100%;
+        }
+
+        .navbar-nav .nav-link {
+            text-align: left;
+            padding: 0.75rem 1rem;
+            margin: 0.1rem 0;
+        }
+
+        .dropdown-menu {
+            background-color: rgba(0, 0, 0, 0.2);
+            margin-top: 0.25rem;
+            padding: 0.5rem 0;
+            position: static;
+            width: 100%;
+        }
+
+        .dropdown-menu .dropdown-item {
+            padding-left: 2.5rem;
+        }
+
+        .navbar-collapse.show {
+            display: block !important;
+        }
+    }
+</style>

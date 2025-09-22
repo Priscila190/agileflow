@@ -108,6 +108,8 @@
                         <th class="py-3 d-none d-md-table-cell">Hora</th>
                         <th class="py-3 d-none d-lg-table-cell">Data</th>
                         <th class="py-3 d-none d-xl-table-cell">Atendente</th>
+                        <th class="py-3 d-none d-xl-table-cell">Ações</th>
+
                     </tr>
                     </thead>
                     <tbody>
@@ -146,18 +148,21 @@
                         </td>
 
                         <td class="text-center">
-                            <a href="{{ url_for('appointments.edit_appointment', appointment_id=appointment.id) }}"
-                               class="btn btn-sm btn-outline-info me-1" title="Editar">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <form action="{{ url_for('appointments.delete_appointment', appointment_id=appointment.id) }}"
-                                  method="POST" class="d-inline"
-                                  onsubmit="return confirm('Deseja realmente excluir este compromisso?');">
-                                <button type="submit" class="btn btn-sm btn-outline-danger" title="Excluir">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </form>
+                            <div class="d-flex flex-wrap justify-content-center gap-1">
+                                <a href="{{ url_for('appointments.edit_appointment', appointment_id=appointment.id) }}"
+                                   class="btn btn-sm btn-outline-info flex-fill" title="Editar">
+                                    <i class="fas fa-edit"></i> 
+                                </a>
+                                <form action="{{ url_for('appointments.delete_appointment', appointment_id=appointment.id) }}"
+                                      method="POST" class="d-inline flex-fill"
+                                      onsubmit="return confirm('Deseja realmente excluir este compromisso?');">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger w-100" title="Excluir">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </td>
+
 
                     </tr>
                     {% endfor %}

@@ -59,7 +59,7 @@ cd agileflow
 ### 2. Criar ambiente virtual e instalar dependências
 
 ```bash
-python -m venv 
+python -m venv venv
 source venv/bin/activate   # Linux/Mac
 venv\Scripts\activate      # Windows
 

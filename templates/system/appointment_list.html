@@ -57,7 +57,7 @@
                     <h5 class="card-title text-white mb-0">Próximos (30min)</h5>
                     {% if next_appointments_today is defined and next_appointments_today|length > 0 %}
                     {% for appointment in next_appointments_today %}
-                    <div class="mb-2 p-2 bg-secondary rounded small text-center">
+                    <div class="mt-4 mb-2 p-2 bg-secondary rounded small text-center">
                         <strong class="text-warning">{{ appointment.time.strftime('%H:%M') if appointment and
                             appointment.time else '' }}</strong> -
                         {{ appointment.name if appointment and appointment.name else '' }}<br>
@@ -145,11 +145,25 @@
                             {{ appointment.attendant | e if appointment.attendant else '' }}
                         </td>
 
+                        <td class="text-center">
+                            <a href="{{ url_for('appointments.edit_appointment', appointment_id=appointment.id) }}"
+                               class="btn btn-sm btn-outline-info me-1" title="Editar">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <form action="{{ url_for('appointments.delete_appointment', appointment_id=appointment.id) }}"
+                                  method="POST" class="d-inline"
+                                  onsubmit="return confirm('Deseja realmente excluir este compromisso?');">
+                                <button type="submit" class="btn btn-sm btn-outline-danger" title="Excluir">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </td>
+
                     </tr>
                     {% endfor %}
                     {% else %}
                     <tr>
-                        <td colspan="6" class="text-center py-5">
+                        <td colspan="7" class="text-center py-5">
                             <div class="text-white-50">
                                 <i class="fas fa-calendar-times fs-1 mb-3"></i>
                                 <p class="mb-0 text-white">Nenhum compromisso encontrado</p>
@@ -160,6 +174,7 @@
                     </tr>
                     {% endif %}
                     </tbody>
+
                 </table>
             </div>
 

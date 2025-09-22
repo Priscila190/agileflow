@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Agendar Compromisso - AgileFlow Solutions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include 'components/stylesheet.html' %}
+</head>
+<body class="body-color-custom text-white d-flex flex-column min-vh-100">
+
+
+<main class="flex-grow-1 d-flex align-items-center py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+
+                <div class="text-center mb-5">
+                    <h1 class="display-5 fw-bold text-white mb-3">
+                        <i class="fas fa-edit me-3"></i>Editar Compromisso
+                    </h1>
+                    <p class="lead text-white-75 mb-4">
+                        Atualize as informações do seu compromisso.
+                    </p>
+                </div>
+
+                <div class="card bg-dark border-secondary shadow-lg">
+                    <div class="card-header bg-dark border-secondary text-center">
+                        <h5 class="card-title text-white mb-0">
+                            <i class="fas fa-calendar-check me-2"></i>
+                            Dados do Compromisso
+                        </h5>
+                    </div>
+
+                    <div class="card-body p-4">
+                        <form method="POST">
+
+                            <div class="mb-4">
+                                <label for="name" class="form-label text-white fw-semibold">
+                                    <i class="fas fa-user me-2"></i>Informação do Compromisso
+                                </label>
+                                <input type="text"
+                                       id="name"
+                                       name="name"
+                                       class="form-control form-control-lg bg-dark text-white border-secondary"
+                                       placeholder="Digite nome do seu compromisso"
+                                       value="{{ appointment.name }}"
+                                       required>
+                                <div class="form-text text-white-50">
+                                    <i class="fas fa-info-circle me-1"></i>
+                                    Nome do compromisso.
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="time" class="form-label text-white fw-semibold">
+                                    <i class="fas fa-clock me-2"></i>Horário
+                                </label>
+                                <input type="time"
+                                       id="time"
+                                       name="time"
+                                       class="form-control form-control-lg bg-dark text-white border-secondary"
+                                       value="{{ appointment.time.strftime('%H:%M') }}"
+                                       required>
+                                <div class="form-text text-white-50">
+                                    <i class="fas fa-info-circle me-1"></i>
+                                    Horário do compromisso.
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="date" class="form-label text-white fw-semibold">
+                                    <i class="fas fa-calendar me-2"></i>Data
+                                </label>
+                                <input type="date"
+                                       id="date"
+                                       name="date"
+                                       class="form-control form-control-lg bg-dark text-white border-secondary"
+                                       value="{{ appointment.date.strftime('%Y-%m-%d') }}"
+                                       required>
+                                <div class="form-text text-white-50">
+                                    <i class="fas fa-info-circle me-1"></i>
+                                    Data do compromisso.
+                                </div>
+                            </div>
+
+                            <div class="mb-5">
+                                <label for="attendant" class="form-label text-white fw-semibold">
+                                    <i class="fas fa-user-tie me-2"></i>Atendente
+                                </label>
+                                <input type="text"
+                                       id="attendant"
+                                       name="attendant"
+                                       class="form-control form-control-lg bg-dark text-white border-secondary"
+                                       placeholder="Nome do atendente"
+                                       value="{{ appointment.attendant }}"
+                                       required>
+                                <div class="form-text text-white-50">
+                                    <i class="fas fa-info-circle me-1"></i>
+                                    Nome do profissional responsável.
+                                </div>
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col-12 col-sm-6">
+                                    <button type="submit" class="btn btn-light btn-lg w-100 text-dark fw-semibold">
+                                        <i class="fas fa-check me-2"></i>
+                                        Salvar Alterações
+                                    </button>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <a href="/appointments" class="btn btn-outline-light btn-lg w-100 fw-semibold">
+                                        <i class="fas fa-arrow-left me-2"></i>
+                                        Voltar
+                                    </a>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+{% include 'components/messages.html' %}
+
+
+{% include 'components/footer.html' %}
+
+
+{% include 'components/script.html' %}
+</body>
+</html>

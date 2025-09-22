@@ -9,7 +9,6 @@ auth_bp = Blueprint('auth', __name__)
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        # Limpa sessão anterior para evitar conflitos
         session.clear()
 
         username = bleach.clean(request.form.get('username', ''))
@@ -57,7 +56,6 @@ def register():
             for error in errors:
                 flash(error, 'error')
         else:
-            # Criar novo usuário
             new_user = User(username=username, email=email)
             new_user.set_password(password)
 

@@ -27,7 +27,6 @@ Este repositório foi planejado para demonstrar não apenas a implementação do
 
 * **Kanban**: Utilizado no GitHub Projects, com colunas **A Fazer**, **Em Progresso** e **Concluído**.
 * **SCRUM**: As tarefas foram divididas em pequenos incrementos simulando *sprints* curtos.
-* **Integração Contínua (CI)**: Testes automatizados configurados via **GitHub Actions**.
 * **Commits Semânticos**: Padrão adotado para manter histórico de mudanças claro e objetivo.
 
 ---
@@ -37,7 +36,6 @@ Este repositório foi planejado para demonstrar não apenas a implementação do
 * ✅ Cadastro e autenticação de usuários (com senha criptografada).
 * ✅ CRUD de compromissos: criar, listar, atualizar e excluir.
 * ✅ Listagem de compromissos por status:
-
     * Próximos.
     * De hoje.
     * Expirados.

@@ -8,7 +8,7 @@ Inspirado em metodologias ágeis, o projeto busca fornecer um ambiente simples e
 * Agendamento de compromissos.
 * Registro e autenticação de usuários.
 * Acompanhamento de atividades em tempo real.
-* Organização do fluxo de trabalho usando **Kanban** no GitHub Projects.
+* Organização do fluxo de trabalho usando **Kanban** [GitHub Projects](https://github.com/users/Priscila190/projects/3)
 
 Este repositório foi planejado para demonstrar não apenas a implementação do software, mas também a aplicação de **boas práticas de documentação, controle de qualidade e gestão de mudanças**.
 
